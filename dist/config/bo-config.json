@@ -1,0 +1,5 @@
+{
+    "jwtSecret": "adminBO-web",
+    "cookieTimeOut" : 3600000,
+    "cryptoSecret": "adminBO-cookie"
+}

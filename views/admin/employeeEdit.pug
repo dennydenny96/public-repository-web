@@ -1,0 +1,173 @@
+#frmEdit.modal.fade(tabindex='-1', role='dialog', aria-labelledby='EditModalLabel', aria-hidden='true')
+    .modal-dialog(role='dialog' style='width:400px')
+        .modal-content.animate
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') X
+            h4.modal-title Edit Employee
+          .modal-body
+            include ../modalAlert.pug
+            form#frmEditChild.form-horizontal(name='frmEditChild')
+              input#submitedit.hidden(type='submit')               
+              .form-group
+                .col-sm-4.control-label
+                  label First Name
+                    span.required *
+                .col-sm-8
+                  input#editFirstName.form-control(placeholder='Enter First Name' type='text' maxlength='20' required)
+              .form-group
+                .col-sm-4.control-label
+                  label Last Name
+                    span.required *
+                .col-sm-8
+                  input#editLastName.form-control(placeholder='Enter Last Name' type='text' maxlength='20' required)
+              .form-group
+                .col-sm-4.control-label
+                  label NIK
+                    span.required *
+                .col-sm-8
+                  input#editNIK.form-control(placeholder='Enter NIK' type='text' maxlength='6' required oninput="this.value=this.value.replace(/(?![A-Z0-9])./gmi,'').toUpperCase()")
+              .form-group
+                .col-sm-4.control-label
+                  label Department
+                    span.required *
+                .col-sm-8
+                  select#editDepartment.form-control.input-lg.select2(name="editDepartment" required)
+              .form-group
+                .col-sm-4.control-label
+                  label Job Title
+                    span.required *
+                .col-sm-8
+                  select#editJobTitle.form-control.input-lg.select2(name="editJobTitle" required)
+              .form-group
+                .col-sm-4.control-label
+                  label Gender
+                    span.required *
+                .col-sm-8
+                  label(style='padding-right: 10px')
+                    input#editGenderM.cusHeight(type='radio', name='gender' required)
+                    | Male
+                  label
+                    input#editGenderF.cusHeight(type='radio', name='gender' required)
+                    | Female
+              .form-group
+                .col-sm-4.control-label
+                  label Place Of Birth
+                    span.required *
+                .col-sm-8
+                  input#editPlaceOfBirth.form-control(placeholder='Enter Place Of Birth' type='text' maxlength='100' required)     
+              .form-group
+                .col-sm-4.control-label
+                  label Date Of Birth
+                    span.required *
+                .col-sm-8
+                  input#editDateOfBirth.form-control.daterange(placeholder='Enter Date Of Birth' type="text" autocomplete="off" maxlength="25")
+              .form-group
+                .col-sm-4.control-label
+                  label Hire Date
+                    span.required *
+                .col-sm-8
+                  input#editHireDate.form-control.daterange(placeholder='Enter Hire Date' type="text" autocomplete="off" maxlength="25")     
+              .form-group
+                .col-sm-4.control-label
+                  label Address
+                    span.required *
+                .col-sm-8
+                  input#editAddress.form-control(placeholder='Enter Address' type='text' required)     
+              .form-group
+                .col-sm-4.control-label
+                  label Phone Number
+                    span.required *
+                .col-sm-8
+                  input#editPhone.form-control(placeholder='Enter Phone Number' oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" type='text' maxlength='20' required)     
+              .form-group
+                .col-sm-4.control-label
+                  label Email Address
+                    span.required *
+                .col-sm-8
+                  input#editEmail.form-control(placeholder='Enter Email Address' type='email' maxlength='128' required)     
+            
+          .modal-footer
+            .form-group
+              button#btnSaveEdit.btn.btn-lg.is-assign(type='button') &nbsp;#{locals.label.save}
+              button.btn.btn-secondary.is-unassign(type='button', data-dismiss='modal') &nbsp;#{locals.label.close}
+
+//- ------------------------------------------------------
+script.
+  $(document).ready(function(){
+    var getJobTitleID, getDepartmentID, paramEmployeeID;
+    $('#frmEdit :input').keypress(function(e){
+      if(e.which == 13){
+        e.preventDefault();
+        $('#btnSaveEdit').click();
+      }
+    });
+
+    $('#editDepartment').on('change', function(){
+      var param = "departmentID=" + $('#editDepartment').val()
+      getCombo(false, '/combo/jobtitles', param, '#editJobTitle', null, function(){
+        if($('#editDepartment').val() == getDepartmentID){
+          $("#editJobTitle").val(getJobTitleID).trigger('change');
+        }
+      })
+    })
+
+    $('#pageTable').on('click', '#edit', function () {
+      var item = $(this);
+      var row = selected = item.parents('tr')[0];
+      var rowData = (pageTable.row(row).data());
+      getDepartmentID = rowData.DepartmentID
+      getJobTitleID = rowData.JobTitleID
+      paramEmployeeID = rowData.ID
+      getCombo(false,'/combo/departments', '', '#editDepartment', null, function(){
+        var param = "departmentID=" + $('#editDepartment').val()
+        getCombo(false, '/combo/jobtitles', param, '#editJobTitle', null, function(){
+          $("#editDepartment, #editJobTitle").select2();
+          $("#editDepartment").val(rowData.DepartmentID).trigger('change');
+        })
+      });
+      (rowData.Gender == "M") ? $("input[id='editGenderM']").prop('checked', true) : $("input[id='editGenderF']").prop('checked', true);
+      $('#editFirstName').val(rowData.FirstName);
+      $('#editLastName').val(rowData.LastName);
+      $('#editNIK').val(rowData.NIK);
+      $('#editPlaceOfBirth').val(rowData.PlaceOfBirth);
+      $('#editDateOfBirth').val(convert.toDateDMY(rowData.DateOfBirth));
+      $('#editHireDate').val(convert.toDateDMY(rowData.HireDate));
+      $('#editAddress').val(rowData.Address);
+      $('#editPhone').val(rowData.Phone);
+      $('#editEmail').val(rowData.Email);
+    })
+  
+    $('#btnSaveEdit').on('click', function() {
+      if (!$('#frmEditChild')[0].checkValidity()) {
+        $('#frmEditChild').find('input[type="submit"]').click();
+        return false;
+      } else {
+        var valueGender;
+        
+        ($("input[id='editGenderM']:checked")[0] !== undefined) ? valueGender = "M": valueGender = "F";
+        var param = "ID=" + paramEmployeeID +
+                    "&NIK=" + $("#editNIK").val() +
+                    "&firstName=" + $("#editFirstName").val() +
+                    "&lastName=" + $("#editLastName").val() +
+                    "&address=" + $("#editAddress").val() +
+                    "&gender=" + valueGender +
+                    "&placeOfBirth=" + $("#editPlaceOfBirth").val() +
+                    "&dateOfBirth=" + $("#editDateOfBirth").val() +
+                    "&email=" + $("#editEmail").val() +
+                    "&phone=" + $("#editPhone").val() +
+                    "&jobTitleID=" + $("#editJobTitle").val() +
+                    "&hireDate=" + $("#editHireDate").val()
+        
+        var url = '/employee/edit'
+        getAjax(url, param, function (data) {
+          if (data.value == "1"){
+            modalSuccess('#frmEdit')
+            pageTable.ajax.reload(null,false);
+          } else {
+            modalError('#frmEdit', data.msg, data.value)
+          }
+        });
+      }
+    });
+  });

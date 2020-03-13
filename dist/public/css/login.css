@@ -1,0 +1,19 @@
+  .error{
+    float:left;
+    margin:4px 0 0;
+  }
+  .error label{
+    float:left;
+    color: red;
+    margin:4px 0 0;
+  }
+  .boxRed {
+    background: #ffedf0;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 15px 10px;
+    text-align: center;
+  }
+  .boxRed label {
+    color:#6a6ac7
+  }

@@ -1,0 +1,251 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
+    title #{locals.label.page_title}
+    link(rel="shortcut icon", href="/dist/public/img/favicon.ico", type="image/x-icon")
+    link(rel='stylesheet', href='./dist/public/css/bootstrap.min.css')
+    link(rel='stylesheet', href='./dist/public/_css/icons.css', type='text/css')
+    link(rel='stylesheet', href='./dist/public/_css/style.css', type='text/css')
+    link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/bower_components/Ionicons/css/ionicons.min.css')
+    link(rel='stylesheet', href='/dist/public/css/AdminLTE.css')
+    link(rel='stylesheet', href='/dist/public/css/skins/skin-blue-light.min.css')
+    link(rel='stylesheet', href='/dist/public/css/all.css')
+    link(rel="stylesheet", href='/dist/public/css/icomoon.css')
+    link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css')
+
+  body.hold-transition.skin-blue-light.sidebar-mini.fixed
+    .wrapper
+      header.main-header
+        // Logo
+        a.logo(href='../dashboard')
+          // mini logo for sidebar mini 50x50 pixels
+          span.logo-mini
+            b 
+            | BO
+          // logo for regular state and mobile devices
+          span.logo-lg
+            b MANAGEMENT
+            | BO
+        // Header Navbar: style can be found in header.less
+        nav.navbar.navbar-static-top
+          // Sidebar toggle button
+          a.sidebar-toggle(href='#', data-toggle='push-menu', role='button')
+            span.sr-only Toggle navigation
+          // Navbar Right Menu
+          .navbar-custom-menu.menu-extras.topbar-custom
+            ul.list-unstyled.float-right.mb-0
+              // language
+              li.dropdown.notification-list
+                - var optionTop = []
+                - var valTop = ['en-us', 'id-id']
+                - optionTop.push('English')
+                - optionTop.push('Bahasa Indonesia')
+                a.nav-link.dropdown-toggle.arrow-none.waves-effect(data-toggle='dropdown', href='#', role='button', aria-haspopup='false', aria-expanded='false')
+                  each val, i in optionTop
+                    -if(data.lang == valTop[i]){
+                      | #{val}
+                      img.ml-2(src='dist/public/img/'+valTop[i].split('-')[1]+'.png', alt=valTop[i], height='16')
+                    -}
+                #langChange.dropdown-menu.dropdown-menu-right.language-switch
+                  each val, i in optionTop
+                    -if(data.lang !== valTop[i]){
+                      a.dropdown-item(href='#' style='width: 200px')
+                        img(src='dist/public/img/'+valTop[i].split('-')[1]+'.png', alt=valTop[i], height='16')
+                        span #{val}
+                    -}
+                  
+              // notification
+              li.dropdown.notification-list
+                a.nav-link.arrow-none.waves-effect(href='skype:live:csupport18?chat', role='button', aria-haspopup='false', aria-expanded='false', title='Skype')
+                  i.fa.fa-skype(style='font-size: 18px;margin-top: -2px;')
+              li.dropdown.notification-list
+                a.nav-link.dropdown-toggle.arrow-none.waves-effect.nav-user(data-toggle='dropdown', href='#', role='button', aria-haspopup='false', aria-expanded='false')
+                  img.rounded-circle.mr-2(src='/dist/public/img/avatar.png', alt='user')
+                  span #{data.username}
+                .dropdown-menu.dropdown-menu-right.profile-dropdown.border-0
+                  // item
+                  .dropdown-item.noti-title
+                    h5 Welcome
+                  
+                  a.dropdown-item(href='#', onclick="addTabs({id:'AD63B2DDEF',title:'Change Password',close:true,url:'account/changepassword/?id=AD63B2DDEF'});")
+                    i.mdi.mdi-settings.m-r-5.text-muted
+                    |  #{locals.label.change_password}
+                  hr(style='margin-top:6px;margin-bottom:6px')
+                  a.dropdown-item(href='/logout')
+                    i.mdi.mdi-logout.m-r-5.text-muted
+                    |  #{locals.label.logout}
+
+              li.menu-item.mr-2
+                | &nbsp;
+              .clearfix
+
+      // Left side column. contains the logo and sidebar
+      aside.main-sidebar(style="font-size:14px;")
+        // sidebar: style can be found in sidebar.less
+        section.sidebar
+          // sidebar menu: : style can be found in sidebar.less
+          ul.sidebar-menu(data-widget="tree")
+            li.treeview.menu-open(data-level='1')
+              a(href='#', onclick="addTabs({title:'Menu', close:true, url: 'menu/list'});")
+                i.fa.fa-arrows-alt.text-primary
+                span.title.menu-text Menu
+                span
+            li.treeview.menu-open(data-level='1')
+              a(href='#', onclick="addTabs({title:'User List', close:true, url: 'userlist'});")
+                i.fa.fa-arrows-alt.text-primary
+                span.title.menu-text User List
+                span
+            li.treeview.menu-open(data-level='1')
+              a(href='#', onclick="addTabs({title:'Master Loan Book List', close:true, url: 'master/loan/book/list'});")
+                i.fa.fa-arrows-alt.text-primary
+                span.title.menu-text Master Loan Book List
+                span
+            li.treeview.menu-open(data-level='1')
+              a(href='#', onclick="addTabs({title:'Transactions Loan Book List', close:true, url: 'transaction/loan/book/list'});")
+                i.fa.fa-arrows-alt.text-primary
+                span.title.menu-text Transactions Loan Book List
+                span
+            li.treeview.menu-open(data-level='1')
+              a(href='#', onclick="addTabs({title:'Report Loan Book List', close:true, url: 'report/loan/book/list'});")
+                i.fa.fa-arrows-alt.text-primary
+                span.title.menu-text Report Loan Book List
+                span
+            //- li.treeview.menu-open(data-level='1')
+            //-   a(href='#', onclick="addTabs({title:'Currency', close:true, url: 'currency/list'});")
+            //-     i.fa.fa-arrows-alt.text-primary
+            //-     span.title.menu-text Currency
+            //-     span
+            //- li.treeview.menu-open(data-level='1')
+            //-   a(href='#', onclick="addTabs({title:'Operator', close:true, url: 'operator/list'});")
+            //-     i.fa.fa-arrows-alt.text-primary
+            //-     span.title.menu-text Operator
+            //-     span
+            //- li.treeview.menu-open(data-level='1')
+            //-   a(href='#', onclick="addTabs({title:'Transaction List', close:true, url: 'transaction/list'});")
+            //-     i.fa.fa-arrows-alt.text-primary
+            //-     span.title.menu-text Transaction List
+            //-     span
+          .clearfix
+
+      #content-wrapper.content-wrapper(style='min-height: 421px;')
+        // bootstrap tab
+        .content-tabs
+          button.roll-nav.roll-left.tabLeft(onclick='scrollTabLeft()')
+            i.ion-chevron-left
+          nav#tab-menu.page-tabs.menuTabs.tab-ui-menu
+            .page-tabs-content(style='margin-left: 0px;')
+          button.roll-nav.roll-right.tabRight(onclick='scrollTabRight()')
+            i.ion-chevron-right(style='margin-left: 3px;')
+          .btn-group.roll-nav.roll-right
+            button.btn.btn-primary.dropdown-toggle.tabClose(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
+              | Tab
+            .dropdown-menu.dropdown-menu-right(x-placement='top-end', style='position: absolute; top: 0px; left: 0px;')
+              a.dropdown-item(href='javascript:refreshTab();') Refresh Tab
+              a.dropdown-item(href='javascript:closeCurrentTab();') Close Current Tab
+              a.dropdown-item(href='javascript:closeOtherTabs(true);') Close All Tabs
+              a.dropdown-item(href='javascript:closeOtherTabs();') Close Other Tabs
+          button.roll-nav.roll-right.fullscreen(onclick='App.handleFullScreen()')
+            i.dripicons-expand-2
+        .content-iframe(style='background-color: #ffffff; ')
+          #tab-content.tab-content
+
+      // /.content-wrapper
+      footer.main-footer(style="height:35px; font-size:12px;")
+        .pull-right
+          b Version
+          |  1.0.8
+        strong
+
+          | Copyright © 2018 - 
+          span#year 
+          //- span.text-red AdminBO 
+        |  All rights
+        |         reserved. &nbsp;
+        
+    // ./wrapper
+    // jQuery 3
+    script(src='/bower_components/jquery/dist/jquery.js')
+    script(src='/dist/public/js/popper.min.js')
+    // Bootstrap 4.3.1
+    script(src='/dist/public/js/bootstrap.min.js')
+    // Slimscroll
+    script(src='/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')
+    // FastClick
+    script(src='/bower_components/fastclick/lib/fastclick.js')
+    // AdminLTE App 2.4.8
+    script(src='/dist/public/js/adminlte.js')
+    // AdminLTE for demo purposes
+    script(src='/dist/public/js/demo.js')
+    // tabs
+    script.
+      const _jsonLang = '#{JSON.stringify(locals.label)}';
+      var objlang = (_jsonLang !== '') ? JSON.parse(_jsonLang.replace(/&quot;/g, '"')) : '';
+    script(src='/dist/public/js/app_iframe.js')
+    script(src='/dist/public/js/users_menu.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js')
+    script(type='text/javascript').
+      $(".sidebar").slimScroll({
+        alwaysVisible: false,
+        position: 'right',
+        size: '5px',
+        color: '#babbde'
+      }); 
+      $(document).on("mousedown", ".menu_tab", function(e) {
+        if( e.which == 2 ) {
+           e.preventDefault();
+           $(this).find('.page_tab_close').trigger('click');
+        }
+      });
+      $(function () {
+        App.setbasePath("../");
+        App.setGlobalImgPath("dist/public/img/");
+
+        $('#langChange').on('click', 'a', function(){
+          var newLang = $(this).find('img').attr('alt')
+          var param = "lang=" + newLang
+          $.ajax({
+            url: '/admin/change/lang',
+            contentType: 'application/x-www-form-urlencoded',
+            type: 'POST',
+            data: param,
+            success: function(){
+              location.reload();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+              console.log(thrownError);
+            }
+          });
+        })
+
+        function session(){
+          $.ajax({
+            url: '/session',
+            contentType: 'application/x-www-form-urlencoded',
+            type: 'POST',
+            success: function(data){
+              if (data.value == -1){
+                window.location.href = document.location.origin+'/login?e=' + data.msg;
+                $.each(opened_tabs, function(i,item){
+                  item.close();
+                })
+              } else {
+                setTimeout(session, 60000);
+              }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {            
+              setTimeout(session, 60000);
+            }
+          });
+        }
+        session();
+
+        var currentYear = (new Date).getFullYear();
+        $('#year').html(currentYear);
+        $('#ddlModule').on('change', function(){
+          UsersMenu.load();
+        });
+      });

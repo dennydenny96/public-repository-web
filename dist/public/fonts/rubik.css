@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    src: url(Rubik_400_normal.eot); /* http://fonts.gstatic.com/s/rubik/v8/iJWKBXyIfDnIV7nBrXg.eot */
+    src: local('☺'),
+        url(Rubik_400_normal.eot?#iefix) format('embedded-opentype'), /* http://fonts.gstatic.com/s/rubik/v8/iJWKBXyIfDnIV7nBrXg.eot */
+        url(Rubik_400_normal.woff2) format('woff2'), /* http://fonts.gstatic.com/s/rubik/v8/iJWKBXyIfDnIV7nBrXw.woff2 */
+        url(Rubik_400_normal.woff) format('woff'), /* http://fonts.gstatic.com/s/rubik/v8/iJWKBXyIfDnIV7nBrXo.woff */
+        url(Rubik_400_normal.ttf) format('truetype'), /* http://fonts.gstatic.com/s/rubik/v8/iJWKBXyIfDnIV7nBrXmw023e.ttf */
+        url(Rubik_400_normal.svg#Rubik_400_normal) format('svg'); /* http://fonts.gstatic.com/l/font?kit=iJWKBXyIfDnIV7nBrXs&skey=cee854e66788286d&v=v8#Rubik */
+}

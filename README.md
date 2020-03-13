@@ -1,2 +1,7 @@
-# public-repository-web
- web
+package.json
+-npm install
+
+Bower Components
+-bower install
+
+npm start

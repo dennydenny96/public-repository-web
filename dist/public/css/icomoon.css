@@ -1,0 +1,65 @@
+@font-face {
+	font-family: 'icomoon';
+	src:  url('../fonts/icomoon/icomoon.eot');
+	src:  url('../fonts/icomoon/icomoon.eot#iefix') format('embedded-opentype'), url('../fonts/icomoon/icomoon.ttf') format('truetype'), url('../fonts/icomoon/icomoon.woff') format('woff'), url('../fonts/icomoon/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+.icon {
+	font-family: 'icomoon' !important;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 17px;
+}
+
+.icon_csv:before {
+	content: "\e900";
+}
+.icon_down:before {
+	content: "\e901";
+	color: #7b7686;
+}
+.icon_up:before {
+	content: "\e902";
+	color: #7b7686;
+}
+.icon_menu:before {
+	content: "\e903";
+}
+.icon_device:before {
+	content: "\e904";
+}
+.icon_currency:before {
+	content: "\e905";
+}
+.icon_pin:before {
+	content: "\e906";
+}
+.icon_password:before {
+	content: "\e907";
+}
+.icon_trash:before {
+	content: "\e908";
+}
+.icon_setting:before {
+	content: "\e909";
+}
+.icon_info:before {
+	content: "\e90a";
+}
+.icon_edit:before {
+	content: "\e90b";
+}
+.icon_bank:before {
+	content: "\e90c";
+}
+.icon_add:before {
+	content: "\e90d";
+}

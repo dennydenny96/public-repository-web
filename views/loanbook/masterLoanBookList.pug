@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    include ../header.pug
+
+  body.hold-transition.skin-blue
+
+    //- Main content
+    section.content     
+      .row
+        .col-sm-12(style="max-width:651px;")
+          table#pageTable.table.dataTable.table-condensed.table-bordered.table-striped.table-hover.nowrap(style="width:600px;")
+            thead
+              tr
+                th Title
+                th Price
+                th Borrowed
+
+    include ../footerAlert.pug
+
+    //- Script
+    include ../script.pug
+    script.
+    script(src="/dist/js/masterLoanBookList"+locals.minify+".js?v=" + locals.vjs)
+
+    //- Modal
+    include ../loanbook/masterLoanBookAdd.pug
+    include ../modalConfirm.pug

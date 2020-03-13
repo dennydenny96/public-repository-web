@@ -1,0 +1,38 @@
+#frmConfirm.modal.fade(tabindex='-1', role='dialog',  data-backdrop="static", data-keyboard="false", aria-hidden='true')
+    .modal-dialog(role='dialog')
+        .modal-content.animate
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') X
+            h4.modal-title #{locals.label.confirm}
+          .modal-body   
+            .form-group
+              .col-sm-12.control-label
+                label#message(style="font-weight:normal")
+                label#nameDelete
+          .modal-footer
+            .form-group
+              button#btnConfirm.btn.btn-lg.is-assign(type='button') #{locals.label.confirm}
+              button.btn.btn-secondary.is-unassign(type='button', data-dismiss='modal') #{locals.label.close}
+
+//- ------------------------------------------------------
+script.
+  var confirmCallback;
+  function modalConfirm(header, msg, msgName, callback){
+    if(header)
+      $('#frmConfirm .modal-title').html(header);
+    if(msg){
+      $('#frmConfirm #message').html(msg);
+      $('#frmConfirm #nameDelete').html(msgName);
+    }
+    if(callback)
+      confirmCallback = callback;
+    $('#frmConfirm').modal('show');
+  }
+  $(document).ready(function(){
+    $('#btnConfirm').on('click', function(){
+      if(confirmCallback)
+        confirmCallback();
+      $('#frmConfirm').modal('hide');
+    });
+  });

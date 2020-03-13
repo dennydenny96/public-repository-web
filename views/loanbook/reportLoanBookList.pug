@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    include ../header.pug
+
+  body.hold-transition.skin-blue
+
+    //- Main content
+    section.content     
+      .row
+        .col-sm-12(style="max-width:1001px;")
+          table#pageTable.table.dataTable.table-condensed.table-bordered.table-striped.table-hover.nowrap(style="width:950px;")
+            thead
+              tr
+                th Username
+                th Title
+                th Price
+                th Loan Day
+                th Return Day
+
+    include ../footerAlert.pug
+
+    //- Script
+    include ../script.pug
+    script.
+    script(src="/dist/js/reportLoanBookList"+locals.minify+".js?v=" + locals.vjs)
+
+    //- Modal
+    //- include ../admin/userAdd.pug
+    include ../modalConfirm.pug

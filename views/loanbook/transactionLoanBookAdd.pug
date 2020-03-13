@@ -1,0 +1,61 @@
+#frmAdd.modal.fade(tabindex='-1', role='dialog', aria-labelledby='AddModalLabel', aria-hidden='true')
+    .modal-dialog(role='dialog' style='width:550px')
+        .modal-content.animate
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') X
+            h4.modal-title Borrow Book
+          .modal-body
+            include ../modalAlert.pug
+            form#frmAddChild.form-horizontal(name='frmAddChild')
+              input#submitadd.hidden(type='submit')               
+              .form-group
+                .col-sm-4.control-label
+                  label Book Name
+                .col-sm-8
+                  select#addBookLoanID.form-control.input-lg.select2(required)
+              
+          .modal-footer
+            .form-group
+              button#btnSaveAdd.btn.btn-lg.is-assign(type='button') &nbsp;#{locals.label.save}
+              button.btn.btn-secondary.is-unassign(type='button', data-dismiss='modal') &nbsp;#{locals.label.close}
+
+//- ------------------------------------------------------
+script.
+  $(document).ready(function(){
+    $('#frmAdd :input').keypress(function(e){
+      if(e.which == 13){
+        e.preventDefault();
+        $('#btnSaveAdd').click();
+      }
+    });
+
+    $('#frmAdd').on('shown.bs.modal', function(){
+      $("#frmAdd input[type=text]").val("");
+      getCombo(false, '/combo/databook', '', '#addBookLoanID', null, function () {  
+        $('#addBookLoanID').select2();
+      });
+    });
+  
+    $('#btnSaveAdd').on('click', function() {
+      if (!$('#frmAddChild')[0].checkValidity()) {
+        $('#frmAddChild').find('input[type="submit"]').click();
+        return false;
+      } else {
+
+        var param = "bookID=" + $("#addBookLoanID").val()
+
+        var url = '/transaction/loan/book/borrow'
+        getAjax(url, param, function (data) {
+          if (data.value == "1"){
+            modalSuccess('#frmAdd')
+            $("#frmAdd input[type=text]").val("");
+            pageTable.ajax.reload(null,false);
+            getCombo(false, '/combo/databook', '', '#addBookLoanID')
+          } else {
+            modalError('#frmAdd', data.msg, data.value)
+          }
+        });
+      }
+    });
+  });

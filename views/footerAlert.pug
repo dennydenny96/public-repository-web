@@ -1,0 +1,12 @@
+section.footer
+  .navbar-fixed-bottom.err-footer
+    .col-sm-12
+      .box.box-transparant
+        #ErrDiv.alert.alert-block.alert-error(style="display:none;")
+          a.close(onClick="$('#ErrDiv').hide()") X
+          h4.alert-heading #{locals.label.warning}!
+          span#ErrMsg 
+        #SuccessDiv.alert.alert-block.alert-success(style="display:none;")
+          a.close(onClick="$('#SuccessDiv').hide()") X
+          h4.alert-heading #{locals.label.success}!
+          span#SuccessMsg

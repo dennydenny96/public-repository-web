@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    include ../header.pug
+
+  body.hold-transition.skin-blue
+
+    //- Main content
+    section.content     
+      .row
+        .col-sm-12(style="max-width:1249px;")
+          table#pageTable.table.dataTable.table-condensed.table-bordered.table-striped.table-hover.nowrap(style="width:1200px;")
+            thead
+              tr
+                th #{locals.label.first_name}
+                th #{locals.label.last_name}
+                th #{locals.label.email}
+                th #{locals.label.department_name}
+                th #{locals.label.job_title_name}
+                th #{locals.label.hire_date}
+                th #{locals.label.actions}
+
+    include ../footerAlert.pug
+
+    //- Script
+    include ../script.pug
+    script.
+    script(src="/dist/js/menuList"+locals.minify+".js?v=" + locals.vjs)
+
+    //- Modal
+    include ../admin/employeeAdd.pug
+    include ../admin/employeeEdit.pug
+    include ../admin/employeeDetails.pug
+    include ../modalConfirm.pug

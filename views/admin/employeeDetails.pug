@@ -1,0 +1,94 @@
+#frmShow.modal.fade(tabindex='-1', role='dialog', aria-labelledby='AddModalLabel', aria-hidden='true')
+    .modal-dialog(role='dialog' style='width:400px')
+        .modal-content.animate
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') X
+            h4.modal-title Employee Details
+          .modal-body
+            include ../modalAlert.pug
+            form#frmShowChild.form-horizontal(name='frmShowChild')          
+              .form-group.show-control
+                .col-sm-12
+                  label First Name
+                .col-sm-12
+                  h4.normal-font#showFirstName
+              .form-group.show-control
+                .col-sm-12
+                  label Last Name
+                .col-sm-12
+                  h4.normal-font#showLastName
+              .form-group.show-control
+                .col-sm-12
+                  label NIK
+                .col-sm-12
+                  h4.normal-font#showNIK
+              .form-group.show-control
+                .col-sm-12
+                  label Department
+                .col-sm-12
+                  h4.normal-font#showDepartment
+              .form-group.show-control
+                .col-sm-12
+                  label Job Title
+                .col-sm-12
+                  h4.normal-font#showJobTitle
+              .form-group.show-control
+                .col-sm-12
+                  label Gender
+                .col-sm-12
+                  h4.normal-font#showGender
+              .form-group.show-control
+                .col-sm-12
+                  label Place Of Birth
+                .col-sm-12
+                  h4.normal-font#showPlaceOfBirth  
+              .form-group.show-control
+                .col-sm-12
+                  label Date Of Birth
+                .col-sm-12
+                  h4.normal-font#showDateOfBirth
+              .form-group.show-control
+                .col-sm-12
+                  label Hire Date
+                .col-sm-12
+                  h4.normal-font#showHireDate
+              .form-group.show-control
+                .col-sm-12
+                  label Address
+                .col-sm-12
+                  h4.normal-font#showAddress  
+              .form-group.show-control
+                .col-sm-12
+                  label Phone Number
+                .col-sm-12
+                  h4.normal-font#showPhone
+              .form-group.show-control
+                .col-sm-12
+                  label Email Address
+                .col-sm-12
+                  h4.normal-font#showEmail
+
+//- ------------------------------------------------------
+script.
+  $(document).ready(function(){
+
+    $('#pageTable').on('click', '#show', function () {
+      var item = $(this);
+      var row = selected = item.parents('tr')[0];
+      var rowData = (pageTable.row(row).data());
+      
+      $("#showFirstName").html(rowData.FirstName)
+      $("#showLastName").html(rowData.LastName)
+      $("#showNIK").html(rowData.NIK)
+      $("#showDepartment").html(rowData.DepartmentName)
+      $("#showJobTitle").html(rowData.JobTitleName)
+      $("#showGender").html((rowData.Gender == "M")? "Male" : "Female")
+      $("#showPlaceOfBirth").html(rowData.PlaceOfBirth)
+      $("#showDateOfBirth").html(convert.toDateDMY(rowData.DateOfBirth))
+      $("#showHireDate").html(convert.toDateDMY(rowData.HireDate))
+      $("#showAddress").html(rowData.Address)
+      $("#showPhone").html(rowData.Phone)
+      $("#showEmail").html(rowData.Email)
+    })
+  })
