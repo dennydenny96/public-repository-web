@@ -66,6 +66,8 @@ html(lang='en')
               .form-group.text-center.row.m-t-20
                 .col-12
                   button#btnRegister.btn.btn-danger.btn-block.waves-effect.waves-light(type='button') Register
+                  button#DirectToLogin.btn.btn-danger.btn-block.waves-effect.waves-light(type='button') Sign In
+                  
           .p-3#flagBtnRedirectToLogin(style='display: none;')
             button#btnRedirectToLogin.btn.btn-danger.btn-block.waves-effect.waves-light(type='button') Redirect to Create Login Account
 
@@ -230,6 +232,11 @@ html(lang='en')
           $('#ErrRegisterMsg').html("Your Phone Number is not valid in Indonesia");
         }
       });
+
+      $('#DirectToLogin').on('click', function() {
+        $("#RegisterForm").hide();
+        $("#LoginForm").show();
+      })
 
       $('#btnRedirectToLogin').on('click', function() {
         $("#RegisterForm").hide();
