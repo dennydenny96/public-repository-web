@@ -130,11 +130,13 @@ function loanBookHelper() {
         const params = JSON.stringify({
             "SessionToken": parameters.sessionToken,
             "UserLogin": parameters.userLogin,
+            "Level": parameters.level,
             "Page": parameters.page,
             "PageSize": parameters.pageSize
         });
 
         helper.postJSON(prgCfg.appConfig.api_bo.url + "/report/loan/book/list.api", params, (err, objJSON) => {
+            console.log(err)
             if (err)
                 return callback(true, objJSON.ErrorMessage);
             else {

@@ -61,7 +61,8 @@ $(document).ready(function () {
         data: null,
         render: function (data, type, row) {
           var result = " <a id='returnBook' href='#' class='btn-dt2 is-yellow'><span class='icon'> Return Book</span></a>"
-          return result;
+          
+          return row.ReturnDay == '0001-01-01T00:00:00' ? result : "";
         }
       }
     ],
@@ -75,7 +76,9 @@ $(document).ready(function () {
 
   $(pageTable.table().container()).removeClass('form-inline');
 
-  $("div.toolbar").html("<button type='button' id='btnAdd' class='btn btn-primary' data-toggle='modal' data-target='#frmAdd'><span class='fa fa-plus'> Borrow Book </span></button>");
+  if(level !== "A"){
+    $("div.toolbar").html("<button type='button' id='btnAdd' class='btn btn-primary' data-toggle='modal' data-target='#frmAdd'><span class='fa fa-plus'> Borrow Book </span></button>");
+  }
 
   $('#pageTable').on('click', '#returnBook', function () {
     var item = $(this);

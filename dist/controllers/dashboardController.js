@@ -33,7 +33,8 @@ function dashboardController() {
         const payload = {
             sub: _token.user_login,
             s: _token.session_token,
-            lang: req.body.lang
+            lang: req.body.lang,
+            level: _token.level
         };
         const jwtSecret = config.jwtSecret;
         const token = jwt.sign(payload, jwtSecret);

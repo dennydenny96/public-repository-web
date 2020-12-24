@@ -97,7 +97,6 @@ function employeesHelper() {
             "JobTitleID": parameters.jobTitleID,
             "HireDate": parameters.hireDate
         });
-        console.log(params)
         helper.postJSON(prgCfg.appConfig.api_bo.url + "/employee/edit.api", params, (err, objJSON) => {
             if (err)
                 return callback(true, objJSON.ErrorMessage);

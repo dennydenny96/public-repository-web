@@ -1,5 +1,4 @@
 "use strict";
-
 const loanBookHelper = require("./../../helper/loanBookHelper").loanBookHelper;
 const baseController = require("./../baseController").baseController;
 
@@ -33,7 +32,6 @@ function loanBookController() {
     // Transactions Loan Book
     //----------------------------------------------------------------------------------------
     obj.getTransactionsLoanBook = function (req, res) {
-        
         res.render("loanbook/transactionsLoanBookList");
     };
 

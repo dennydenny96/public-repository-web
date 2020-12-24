@@ -52,6 +52,8 @@ $(document).ready(function () {
 
   $(pageTable.table().container()).removeClass('form-inline');
 
-  $("div.toolbar").html("<button type='button' id='btnAdd' class='btn btn-primary' data-toggle='modal' data-target='#frmAdd'><span class='fa fa-plus'> " + objlang['add'] + "</span></button>");
+  if(level == "P"){
+    $("div.toolbar").html("<button type='button' id='btnAdd' class='btn btn-primary' data-toggle='modal' data-target='#frmAdd'><span class='fa fa-plus'> " + objlang['add'] + "</span></button>");
+  }
 
 });

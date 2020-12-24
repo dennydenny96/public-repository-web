@@ -97,7 +97,7 @@ function loginController() {
             }
 
             if (err) {
-                req.flash("errors", err);
+                req.flash("errors", datatoken);
                 
                 return res.render("account/login", { data: req.body, capcha: cap, lang: lang});
             }

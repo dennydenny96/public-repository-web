@@ -1,5 +1,4 @@
 "use strict";
-
 const Config = require("../config/bo-config.json");
 const jwt = require("jsonwebtoken");
 
@@ -18,6 +17,8 @@ function authCheck() {
             if (err) {
                 return res.status(401).end();
             }
+            
+            res.locals.level = decoded.lvl;
             res.locals.label = require("../config/language/"+decoded.lang+".json");
             return next();
         });

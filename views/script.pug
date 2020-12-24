@@ -27,8 +27,10 @@ script(type='text/javascript').
       families: ['Rubik']
     }
   });
+  const _jsonLevel = '#{JSON.stringify(locals.level)}';
   const _jsonAuth = '#{JSON.stringify(auth)}';
   const _jsonLang = '#{JSON.stringify(locals.label)}';
+  var level = (_jsonLevel !== '')? JSON.parse(_jsonLevel.replace(/&quot;/g,'"')) : '';
   var auth = (_jsonAuth !== '')? JSON.parse(_jsonAuth.replace(/&quot;/g,'"')) : '';
   var objlang = (_jsonLang !== '')? JSON.parse(_jsonLang.replace(/&quot;/g,'"')) : '';
   var pageTable;

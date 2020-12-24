@@ -18,7 +18,7 @@ html(lang='en')
     
   body.fixed-left#testing
     .accountbg
-    .wrapper-page#RegisterForm(style='margin:12% auto;')
+    .wrapper-page#RegisterForm(style='margin:12% auto; display:none;')
       .card
         .card-body
           #ErrDivRegisterForm.alert.alert-block.alert-error(style="display:none; background-color:#ffedf0; color: red;")
@@ -99,7 +99,8 @@ html(lang='en')
                 .col-12
                   button#btnCreateAccount.btn.btn-danger.btn-block.waves-effect.waves-light(type='button') Create Account Login
 
-    .wrapper-page#LoginForm(style='margin:12% auto; display: none;')
+    //- .wrapper-page#LoginForm(style='margin:12% auto; display: none;')
+    .wrapper-page#LoginForm(style='margin:12% auto;')
           .card
             .card-body
               .text-center.m-b-15

@@ -29,7 +29,8 @@ function userHelper() {
                     const SID = objJSON.Content.Data[0].SessionToken.toString();
                     payload = {
                         i: objJSON.Content.Data[0].UserID.toString(),
-                        sub: req.body.username.trim(),
+                        // sub: req.body.username.trim(),
+                        sub: objJSON.Content.Data[0].UserID.toString(),
                         s: SID,
                         lang: "en-us",
                         c: "",
@@ -37,12 +38,15 @@ function userHelper() {
                         guid: "123123",
                         lvl: objJSON.Content.Data[0].Level
                     };
+                    
                     const jwtSecret = config.jwtSecret;
                     const token = jwt.sign(payload, jwtSecret);
                     if (!token)
                         return callback("Token error");
                     return callback(undefined, token);
                 }
+                else
+                    return callback(true, objJSON.ErrorMessage);
             }
         })
     };
@@ -58,7 +62,7 @@ function userHelper() {
             "Gender": parameters.gender,
             "Email": parameters.email
         });
-        console.log(params)
+        
         helper.postJSON(prgCfg.appConfig.api_bo.url + "/registration.api", params, (err, objJSON) => {
             if (err)
                 return callback(true, objJSON.ErrorMessage);
@@ -81,7 +85,7 @@ function userHelper() {
             "Level": parameters.level,
             "MobileNumber": parameters.mobileNumber
         });
-        console.log(params)
+        
         helper.postJSON(prgCfg.appConfig.api_bo.url + "/create/account/login/user.api", params, (err, objJSON) => {
             if (err)
                 return callback(true, objJSON.ErrorMessage);
